@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+import os
+import shutil
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -75,12 +76,23 @@ WSGI_APPLICATION = 'escola.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if os.environ.get('VERCEL'):
+    tmp_db = '/tmp/db.sqlite3'
+    if not os.path.exists(tmp_db) and os.path.exists(BASE_DIR / 'db.sqlite3'):
+        shutil.copy2(BASE_DIR / 'db.sqlite3', tmp_db)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': tmp_db,
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
