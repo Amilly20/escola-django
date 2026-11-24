@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Alunos</title>
+    </head>
+    <body>
+        {% include 'alunos/navegacao.html' %}
+        <h1>Cadastrar Alunos</h1>
+        {% if aluno %}
+            <div style="background: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+                <strong>Aluno cadastrado com sucesso!</strong><br>
+                Nome: {{ aluno.nome }} | Matrícula: {{ aluno.matricula }} | CPF: {{ aluno.cpf }}
+            </div>
+        {% endif %}
+        <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="nome" placeholder="Nome do aluno" required><br><br>
+        <input type="number" name="idade" placeholder="Idade do aluno" required><br><br>
+        <input type="email" name="email" placeholder="Email do aluno" required><br><br>
+        <input type="text" name="telefone" placeholder="Telefone do aluno" required><br><br>
+        <input type="text" name="endereco" placeholder="Endereço do aluno" required><br><br>
+        <input type="text" name="matricula" placeholder="Matrícula do aluno" required><br><br>
+        <input type="text" name="cpf" placeholder="CPF do aluno" required><br><br>
+        <button type="submit">Cadastrar</button>
+        </form>
+    <br>
+    <a href="{% url 'listar_alunos'%}">Ver lista de Alunos</a>
+    </body>
+    </html>

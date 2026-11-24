@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset=""UTF-8>
+        <title>Lista de Alunos</title>
+        </head>
+        <body>
+            {% include 'alunos/navegacao.html' %}
+            <h1>Lista de Alunos</h1>
+            <a href="{% url 'cadastrar_alunos'%}">+ Novo Aluno</a>
+            <ul>
+                {% for aluno in alunos%}
+                     <li>{{aluno.nome}} - Matricula:{{aluno.matricula}} - CPF:{{aluno.cpf}} _ Idade:{{aluno.idade}}</li>
+                {% empty %}
+                    <li>Nenhum aluno cadastrado.</li>
+                {% endfor %}
+            </ul>
+        </body>
+</html>

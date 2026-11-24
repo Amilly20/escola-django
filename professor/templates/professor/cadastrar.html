@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head><meta charset="UTF-8"><title>Cadastro de Professores</title></head>
+<body>
+    {% include 'alunos/navegacao.html' %}
+    <h1>Cadastro de Professores</h1>
+    {% if professor %}
+        <div style="background: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+            <strong>Professor cadastrado com sucesso!</strong><br>
+            Nome: {{ professor.nome }} | Disciplina: {{ professor.disciplina }}
+        </div>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <p><input type="text" name="nome" placeholder="Nome" required></p>
+        <p><input type="text" name="disciplina" placeholder="Disciplina" required></p>
+        <p><input type="email" name="email" placeholder="Email" required></p>
+        <p><input type="text" name="telefone" placeholder="Telefone" required></p>
+        <button type="submit">Cadastrar</button>
+    </form>
+    <a href="{% url 'listar_professores' %}">Listar professores</a>
+</body>
+</html>
